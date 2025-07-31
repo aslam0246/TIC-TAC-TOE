@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <h1 class="game-title">
+                <span class="title-letter">T</span>
+                <span class="title-letter">i</span>
+                <span class="title-letter">c</span>
+                <span class="title-space"></span>
+                <span class="title-letter">T</span>
+                <span class="title-letter">a</span>
+                <span class="title-letter">c</span>
+                <span class="title-space"></span>
+                <span class="title-letter">T</span>
+                <span class="title-letter">o</span>
+                <span class="title-letter">e</span>
+            </h1>
+            <div class="game-mode-selector">
+                <button class="mode-btn active" data-mode="human">vs Human</button>
+                <button class="mode-btn" data-mode="ai">vs AI</button>
+            </div>
+        </header>
+
+        <!-- Game Info -->
+        <div class="game-info">
+            <div class="player-info">
+                <div class="player player-x active">
+                    <div class="player-icon">X</div>
+                    <div class="player-details">
+                        <span class="player-name">Player X</span>
+                        <span class="player-score" id="scoreX">0</span>
+                    </div>
+                </div>
+                <div class="current-turn">
+                    <div class="turn-indicator">
+                        <span id="currentPlayer">X</span>'s Turn
+                    </div>
+                </div>
+                <div class="player player-o">
+                    <div class="player-icon">O</div>
+                    <div class="player-details">
+                        <span class="player-name">Player O</span>
+                        <span class="player-score" id="scoreO">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-board-container">
+            <div class="game-board" id="gameBoard">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+            <div class="winning-line" id="winningLine"></div>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button class="control-btn reset-btn" id="resetBtn">
+                <span class="btn-icon">🔄</span>
+                Reset Game
+            </button>
+            <button class="control-btn new-game-btn" id="newGameBtn">
+                <span class="btn-icon">🎮</span>
+                New Game
+            </button>
+            <button class="control-btn settings-btn" id="settingsBtn">
+                <span class="btn-icon">⚙️</span>
+                Settings
+            </button>
+        </div>
+
+        <!-- Game Stats -->
+        <div class="game-stats">
+            <div class="stat-item">
+                <span class="stat-label">Games Played</span>
+                <span class="stat-value" id="gamesPlayed">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Draws</span>
+                <span class="stat-value" id="draws">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Win Rate</span>
+                <span class="stat-value" id="winRate">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="gameOverTitle">Game Over!</h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="winner-animation" id="winnerAnimation">
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                </div>
+                <p id="gameOverMessage">Congratulations!</p>
+                <div class="modal-actions">
+                    <button class="modal-btn play-again-btn" id="playAgainBtn">Play Again</button>
+                    <button class="modal-btn close-btn" id="closeModalBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Game Settings</h2>
+                <button class="modal-close" id="settingsClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label for="difficultySelect">AI Difficulty:</label>
+                    <select id="difficultySelect" class="setting-select">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                        <option value="impossible">Impossible</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label for="animationToggle">Animations:</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="animationToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <label for="soundToggle">Sound Effects:</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="soundToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn save-btn" id="saveSettingsBtn">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles for effects -->
+    <div class="particles" id="particles"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

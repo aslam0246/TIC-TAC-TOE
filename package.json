@@ -1,0 +1,25 @@
+{
+  "name": "advanced-tic-tac-toe",
+  "version": "1.0.0",
+  "description": "An advanced Tic Tac Toe game with animations, AI, and modern features",
+  "main": "index.html",
+  "scripts": {
+    "dev": "http-server . -o -p 3000",
+    "start": "http-server . -o -p 3000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "tic-tac-toe",
+    "game",
+    "html",
+    "css",
+    "javascript",
+    "animations",
+    "ai"
+  ],
+  "author": "Game Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
