@@ -60,12 +60,6 @@ Then, open your browser and visit: http://localhost:3000
 
 ---
 
-## 📸 Screenshots
-
-(Add gameplay screenshots here in your repo)
-
----
-
 ## 📌 To-Do / Future Enhancements
 
 - Add player name input
@@ -85,11 +79,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## 📄 License
 
 This project is licensed under the MIT License.
-
----
-
-## 👤 Author
-
-Developed by Game Developer
 
 ---
